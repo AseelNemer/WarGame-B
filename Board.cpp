@@ -17,56 +17,74 @@ Soldier* &Board::operator[](std::pair<int, int> location)
     }
 
     
-void Board ::move(uint player_number, std::pair<int,int> source, WarGame::Board::MoveDIR direction)
+void Board::move(uint teamID, std::pair<int,int> source, WarGame::Board::MoveDIR direction)
 {
+        
         int x=source.first;
         int y=source.second;
-        if(x<0 ||  x >=board.size()   ||  y<0 ||  y>=board[0].size())
+        cout << "id " <<teamID <<endl;
+        cout << "x= " << x<<endl;
+        cout << "y= "<< y<<endl;
+        if( x < 0 ||  x >=board.size()   ||  y<0 ||  y>=board[0].size())
                 throw std::invalid_argument("You are off the board");
-        if(board[x][y]==nullptr || board[x][y]->team_id !=player_number)
+        if(board[x][y]==nullptr || board[x][y]->team_id !=teamID)
                 throw std::invalid_argument("you do not have a solider in this place");
         
-        if(direction== MoveDIR::Up)
+        if(direction== WarGame::Board::MoveDIR::Up)
         {
-                if(x+1>=board.size() || board[x+1][y]!=nullptr)
+                cout << "up" <<endl;
+                if((x+1)>=board.size() || board[x+1][y]!=nullptr){
                         throw std::invalid_argument("You cannot go up you will be out of the board or there is another solider there!");
-                else 
+               } else {
                         board[x+1][y]=board[x][y];
-                        delete board[x][y];
+                        //delete board[x][y];
                         board[x][y]=nullptr;
-                        board[x+1][y]->activate(board,x,y);
+                        if(board[x][y]==nullptr)
+                        board[x+1][y]->activate(board,x+1,y);
+
+                }
 
 
         }
-        if(direction== MoveDIR::Down)
+        if(direction== WarGame::Board::MoveDIR::Down)
         {
-                if(x-1<0|| board[x-1][y]!=nullptr)
+                                cout << "down" <<endl;
+
+                if(x-1<0 || board[x-1][y]!=nullptr){
                         throw std::invalid_argument("You cannot go down you will be out of the board or there is another solider there!");
-                else 
+                }else {
                         board[x-1][y]=board[x][y];
-                        delete board[x][y];
                         board[x][y]=nullptr;
-                        board[x-1][y]->activate(board,x,y);
+                        board[x-1][y]->activate(board,x-1,y);
+                }
         }
-        if(direction== MoveDIR::Right)
+        if(direction== WarGame::Board::MoveDIR::Right)
         {
-                if(y+1>=board[0].size() || board[x][y+1]!=nullptr)
+                                                cout << "right" <<endl;
+
+                if(y+1>=board[0].size() || board[x][y+1]!=nullptr){
                         throw std::invalid_argument("You cannot right up you will be out of the board or there is another solider there!");
-                else 
+        }else
+                { 
                         board[x][y+1]=board[x][y];
-                        delete board[x][y];
+                        //delete board[x][y];
                         board[x][y]=nullptr;
-                        board[x][y+1]->activate(board,x,y);
+                        board[x][y+1]->activate(board,x,y+1);
+                }
         }
-        if(direction== MoveDIR::Left)
+        if(direction== WarGame::Board::MoveDIR::Left)
         {
-                if(y-1>=board[0].size() || board[x][y-1]!=nullptr)
+                                                cout << "left" <<endl;
+
+                if(y-1>=board[0].size() || board[x][y-1]!=nullptr){
                         throw std::invalid_argument("You cannot go left you will be out of the board or there is another solider there!");
-                else 
+                 } else
+        { 
                         board[x][y-1]=board[x][y];
-                        delete board[x][y];
+                        //delete board[x][y];
                         board[x][y]=nullptr;
-                        board[x][y-1]->activate(board,x,y);
+                        board[x][y-1]->activate(board,x,y-1);
+        }
         }
 
 }

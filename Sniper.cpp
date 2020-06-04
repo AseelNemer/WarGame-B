@@ -5,7 +5,7 @@
 #include "Sniper.hpp"
 #include "Board.hpp"
 using namespace std;
-#define MAX_HEALTH 100
+//#define MAX_HEALTH 100
 #define HIT_DAMAGE 50
 
 //namespace WarGame
@@ -17,14 +17,15 @@ using namespace std;
        std::pair<int,int> loc;
        for(int i=0;i<board.size();i++)
        {
+           cout << "i= " << i<<endl;
            for(int j=0;j<board.at(i).size();j++)
            {
-               if(board[i][j]->get_id()!=this->team_id)
+               if((board[i][j]!=nullptr) && (board[i][j]->team_id!=this->team_id))
                {
                    if(board[i][j]->health>strong)
                    {
                        strong=board[i][j]->health;
-                       loc.first==i;
+                       loc.first=i;
                        loc.second=j;
                    }
                }

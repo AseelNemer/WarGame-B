@@ -35,6 +35,7 @@
 	    board.move(1,{1,1},WarGame::Board::MoveDIR::Up);
 	    CHECK(!board.has_soldiers(2));
 	    CHECK(board.has_soldiers(1));
+		//9
 	}
 
 	TEST_CASE("Foot vs Foot") {
@@ -101,7 +102,7 @@
 	    board.move(2,{4,1},WarGame::Board::MoveDIR::Down); //soldier 1 - 0
 	    CHECK(board.has_soldiers(2));
 	    CHECK(!board.has_soldiers(1));
-
+//39
 	}
 	TEST_CASE("3 VS 3") {
 	    WarGame::Board board(8,8);
@@ -162,7 +163,7 @@
 	    board.move(1,{1,2},WarGame::Board::MoveDIR::Up);
 	    CHECK(!board.has_soldiers(2));
 	    CHECK(board.has_soldiers(1));
-
+//30
 		// the winner is team 1
 	}
 	TEST_CASE("One soldier of this type"){
@@ -222,7 +223,7 @@
 
 	    //just to be Sure all is dead
 	    CHECK(!board.has_soldiers(2));
-
+//18
 		//good test
 	}
 	TEST_CASE("2 VS 2"){

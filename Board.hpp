@@ -10,19 +10,19 @@ namespace WarGame {
 
 class Board {
   private:
-    std::vector<std::vector<Soldier*>> board;
+        std::vector<std::vector<Soldier*>> board;
   public:
     enum MoveDIR { Up, Down, Right, Left };
     
-    Board(uint numRows, uint numCols) : 
-      board(numRows, std::vector<Soldier*>(numCols, nullptr)) {}
+    Board(uint numRows, uint numCols) :
+        board(numRows, std::vector<Soldier*>(numCols, nullptr)) {}
 
     Soldier* &operator[](std::pair<int,int> location);
 
         // operator for reading which soldiers are on the game-board.
     Soldier* operator[](std::pair<int,int> location) const;
     
-    void move(uint player_number, std::pair<int,int> source, MoveDIR direction);
+    void move(uint teamID, std::pair<int,int> source, MoveDIR direction);
 
     bool has_soldiers(uint teamID) const;
 

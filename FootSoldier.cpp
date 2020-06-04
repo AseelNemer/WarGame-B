@@ -8,7 +8,7 @@
 #include "Board.hpp"
 
 using namespace std;
-#define MAX_HEALTH 100
+//#define MAX_HEALTH 100
 #define HIT_DAMAGE 10
 
 //namespace WarGame{        
@@ -24,13 +24,7 @@ using namespace std;
             for(int j=0;j<board.at(i).size();j++)
             {
                  if (board[i][j] != nullptr && this->team_id!=board[i][j]->get_id()&& board[i][j]->get_id() != 0) {
-                   std::pair<int,int> from;
-                   from.first=row;
-                   from.second=col;
-                   std::pair<int,int> to;
-                   to.first=i;
-                   to.second=j;
-                    distance= FootSoldier::dist(from, to );
+                  distance= pow(row-i,2)+pow(col-j,2);
                     
                     if(distance <min_dist)
                       { 
@@ -44,7 +38,7 @@ using namespace std;
         
         }
         // loc is the locatcion of closer player to this player
-        if(min_dist<DBL_MAX)
+        if(board[loc.first][loc.second]!=nullptr)
         {
             board[loc.first][loc.second]->health-=HIT_DAMAGE;
             if(board[loc.first][loc.second]->health<=0)
@@ -70,10 +64,7 @@ using namespace std;
     {
         this->health=MAX_HEALTH;
     }
-    double FootSoldier::dist(std::pair<int, int> from, std::pair<int, int> to)
-    {
-        return sqrt(pow(from.first-to.first,2) + pow(from.second - to.second,2));
-    }
+    
 
 
 //}

@@ -5,7 +5,7 @@
 #include "SniperCommander.hpp"
 #include "Board.hpp"
 using namespace std;
-#define MAX_HEALTH 120
+//#define MAX_HEALTH 120
 #define HIT_DAMAGE 100
 
 
@@ -19,7 +19,7 @@ using namespace std;
        {
            for(int j=0;j<board.at(i).size();j++)
            {
-               if(board[i][j]->get_id()!=this->team_id)
+               if(board[i][j]!=nullptr&& board[i][j]->team_id!=this->team_id)
                {
                    if(board[i][j]->health>strong)
                    {
@@ -28,7 +28,7 @@ using namespace std;
                        loc.second=j;
                    }
                }
-               if(board[i][j]!=nullptr && (typeid(board[i][j])==typeid(Sniper)))
+               if(board[i][j]!=nullptr && (typeid(board[i][j])==typeid(Sniper))&& board[i][j]->team_id== this->team_id)
                     board[i][j]->activate(board,i,j);
            }
        }

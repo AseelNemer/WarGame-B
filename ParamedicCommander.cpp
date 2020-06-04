@@ -5,25 +5,25 @@
 #include "Board.hpp"
 using namespace std;
 
-#define MAX_HEALTH 200
+//#define MAX_HEALTH 200
 
 //namespace WarGame{
     
     int ParamedicCommander::activate(std::vector<std::vector<Soldier*>> &board, int row, int col) 
     {
-        if(board[row+1][col]!=nullptr && (board[row+1][col]->team_id==this->team_id))
+        if(row<board.size()-2 && board[row+1][col]!=nullptr && (board[row+1][col]->team_id==this->team_id))
         {
             board[row+1][col]->return_to_max_health();
         }
-         if(board[row-1][col]!=nullptr && (board[row-1][col]->team_id==this->team_id))
+         if(row!=0 && board[row-1][col]!=nullptr && (board[row-1][col]->team_id==this->team_id))
         {
              board[row-1][col]->return_to_max_health();
         }
-         if(board[row][col+1]!=nullptr && (board[row][col+1]->team_id==this->team_id))
+         if(col<=board[0].size()-2 && board[row][col+1]!=nullptr && (board[row][col+1]->team_id==this->team_id))
         {
            board[row][col+1]->return_to_max_health();
         }
-         if(board[row][col-1]!=nullptr && (board[row][col-1]->team_id==this->team_id))
+         if(col!=0&&board[row][col-1]!=nullptr && (board[row][col-1]->team_id==this->team_id))
         {
            board[row][col-1]->return_to_max_health();
         } 
@@ -33,7 +33,11 @@ using namespace std;
             for(int j=0;j<board.at(i).size();j++)
             {
                 if(board[i][j]!=nullptr && (board[i][j]->team_id==this->team_id)&& board[i][j]->damage==0)
+                    {
+                        cout<< "i== at para "<< i <<endl;
+                    cout<< "j== at para "<< j <<endl;
                     board[i][j]->activate(board,i,j);
+                    }
             }
         }
         return 0;

@@ -8,7 +8,7 @@
 #include "Board.hpp"
 using namespace std;
 
-#define MAX_HEALTH 150
+//#define MAX_HEALTH 150
 #define HIT_DAMAGE 20
 
 //namespace WarGame
@@ -24,44 +24,45 @@ using namespace std;
         {
             for(int j=0;j<board.at(i).size();j++)
             {
-                 if (board[i][j] != nullptr && this->team_id!=board[i][j]->get_id()&& board[i][j]->get_id() != 0) 
+                 if (board[i][j] != nullptr && this->team_id!=board[i][j]->team_id) 
                  {
-                    std::pair<int,int> from;
-                   from.first=row;
-                   from.second=col;
-                   std::pair<int,int> to;
-                   to.first=i;
-                   to.second=j;
-                    distance= FootCommander::dist(from, to );
+                   distance= pow(row-i,2)+pow(col-j,2);
+                   cout<< "r== "<<row<<endl;
+                        cout << "c== "<< col<<endl;
                     
-                    if(distance <min_dist)
+                    if(distance < min_dist)
                       { 
                         min_dist=distance;
                         loc.first=i;
                         loc.second=j;
+                        cout<< "i== "<<i<<endl;
+                        cout << "j== "<< j<<endl;
                       }
                 }
                 //check if there is another footsolider and send it to the activate function
-                if(board[i][j]!=nullptr && (typeid(board[i][j])==typeid(FootSoldier)))
+                if(board[i][j]!=nullptr && (typeid(board[i][j])==typeid(FootSoldier))&&board[i][j]->team_id== this->team_id)
                     board[i][j]->activate(board,i,j);
 
             }
         
         }
         // loc is the locatcion of closer player to this player
-        if(min_dist<DBL_MAX)
+        if(board[loc.first][loc.second]!=nullptr)
         {
+            cout <<board[loc.first][loc.second]->health<<endl;
             board[loc.first][loc.second]->health-=HIT_DAMAGE;
-            if(board[loc.first][loc.second]->health<=0)
+            if(board[loc.first][loc.second]->health <= 0)
              {  
+                 cout<< "yesss"<<endl;
                 delete board[loc.first][loc.second];
                 board[loc.first][loc.second]=nullptr;
 
                 return 1;
              }
-        //did not remove a solider!
-         return 0; 
-        }      
+        
+        } 
+         //did not remove a solider!
+         return 0;     
     }
 
    
@@ -76,8 +77,4 @@ using namespace std;
         this->health= MAX_HEALTH;
     }
     
-    double FootCommander::dist(std::pair<int, int> from, std::pair<int, int> to)
-    {
-        return sqrt(pow(from.first-to.first,2) + pow(from.second - to.second,2));
-    }
 //}    
