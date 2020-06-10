@@ -6,7 +6,7 @@
 #include "Board.hpp"
 using namespace std;
 //#define MAX_HEALTH 120
-#define HIT_DAMAGE 100
+//#define HIT_DAMAGE 100
 
 
 //namespace WarGame{
@@ -21,21 +21,22 @@ using namespace std;
            {
                if(board[i][j]!=nullptr&& board[i][j]->team_id!=this->team_id)
                {
-                   if(board[i][j]->health>strong)
+                   if(board[i][j]->health > strong)
                    {
                        strong=board[i][j]->health;
                        loc.first=i;
                        loc.second=j;
                    }
                }
-               if(board[i][j]!=nullptr && (typeid(board[i][j])==typeid(Sniper))&& board[i][j]->team_id== this->team_id)
-                    board[i][j]->activate(board,i,j);
+               if(board[i][j]!=nullptr && board[i][j]->team_id== this->team_id)
+                   if(dynamic_cast<Sniper*>(board[i][j])) 
+                   board[i][j]->activate(board,i,j);
            }
        }
        //if there is a solider with a most health
-       if(strong>0 && board[loc.first][loc.second]!=nullptr )
+       if(board[loc.first][loc.second]!=nullptr )
        {
-           board[loc.first][loc.second]->health-=HIT_DAMAGE;
+           board[loc.first][loc.second]->health-=100;
             if(board[loc.first][loc.second]->health<=0)
              {  
                 delete board[loc.first][loc.second];
@@ -54,6 +55,6 @@ using namespace std;
 
     void SniperCommander::return_to_max_health()
     {   
-        this->health=MAX_HEALTH;
+        this->health=120;
     }
 //}

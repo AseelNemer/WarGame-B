@@ -6,7 +6,7 @@
 #include "Board.hpp"
 using namespace std;
 //#define MAX_HEALTH 100
-#define HIT_DAMAGE 50
+//#define HIT_DAMAGE 50
 
 //namespace WarGame
 //{
@@ -17,14 +17,14 @@ using namespace std;
        std::pair<int,int> loc;
        for(int i=0;i<board.size();i++)
        {
-           cout << "i= " << i<<endl;
            for(int j=0;j<board.at(i).size();j++)
            {
-               if((board[i][j]!=nullptr) && (board[i][j]->team_id!=this->team_id))
+               if(board[i][j] != nullptr && board[i][j]->team_id != this->team_id)
                {
-                   if(board[i][j]->health>strong)
+                   int temp=board[i][j]->health;
+                   if(temp > strong)
                    {
-                       strong=board[i][j]->health;
+                       strong=temp;
                        loc.first=i;
                        loc.second=j;
                    }
@@ -32,12 +32,12 @@ using namespace std;
            }
        }
        //if there is a solider with a most health
-       if(strong>0 && board[loc.first][loc.second]!=nullptr )
+       if( board[loc.first][loc.second]!=nullptr )
        {
-           board[loc.first][loc.second]->health-=HIT_DAMAGE;
+           board[loc.first][loc.second]->health-=50;
             if(board[loc.first][loc.second]->health<=0)
              {  
-                delete board[loc.first][loc.second];
+               delete board[loc.first][loc.second];
                 board[loc.first][loc.second]=nullptr;
                 return 1;
              }
@@ -53,6 +53,6 @@ using namespace std;
 
     void Sniper::return_to_max_health()
     {
-        this->health=MAX_HEALTH;
+        this->health=100;
     }
 //}

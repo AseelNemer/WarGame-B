@@ -1,22 +1,19 @@
-#pragma once
-#include <string>
-#include <vector>
-#include <stdexcept>
-#include "FootSoldier.hpp"
+#ifndef UNTITLED_FOOTCOMMANDER_HPP
+#define UNTITLED_FOOTCOMMANDER_HPP
 #include "Soldier.hpp"
+#include "FootSoldier.hpp"
 
-#define MAX_HEALTH 150
-#define HIT_DAMAGE 20
+//#define MAX_HEALTH 150
+//#define HIT_DAMAGE 20
 
 //namespace WarGame
 //{
     class FootCommander : public Soldier{
 
-        private:
-        int team_id;
+       
         public:
 
-        FootCommander(int id) : Soldier(MAX_HEALTH,HIT_DAMAGE,id){}
+        FootCommander(int id) : Soldier(150,20,id){}
          
          ~FootCommander()
         {
@@ -29,5 +26,5 @@
         double dist(std::pair<int, int> from, std::pair<int, int> to);
         
     };
-
+#endif
 //} 

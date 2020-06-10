@@ -32,11 +32,11 @@ using namespace std;
         {
             for(int j=0;j<board.at(i).size();j++)
             {
-                if(board[i][j]!=nullptr && (board[i][j]->team_id==this->team_id)&& board[i][j]->damage==0)
+                if(board[i][j]!=nullptr && (board[i][j]->team_id==this->team_id) )
                     {
-                        cout<< "i== at para "<< i <<endl;
-                    cout<< "j== at para "<< j <<endl;
-                    board[i][j]->activate(board,i,j);
+                        if( dynamic_cast<Paramedic*>(board[i][j]))
+                       
+                     board[i][j]->activate(board,i,j);
                     }
             }
         }
@@ -50,7 +50,7 @@ using namespace std;
 
     void ParamedicCommander::return_to_max_health()
     {
-        this->health=MAX_HEALTH;
+        this->health=200;
     }
 
 //}

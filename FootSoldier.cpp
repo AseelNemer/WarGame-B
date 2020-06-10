@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #include <iostream>
 #include <stdio.h>
@@ -9,7 +10,7 @@
 
 using namespace std;
 //#define MAX_HEALTH 100
-#define HIT_DAMAGE 10
+//#define HIT_DAMAGE 10
 
 //namespace WarGame{        
     
@@ -21,9 +22,9 @@ using namespace std;
         double distance;
         for(int i=0 ;i<board.size();i++)
         {
-            for(int j=0;j<board.at(i).size();j++)
+            for(int j=0;j<board[i].size();j++)
             {
-                 if (board[i][j] != nullptr && this->team_id!=board[i][j]->get_id()&& board[i][j]->get_id() != 0) {
+                 if (board[i][j] != nullptr && this->team_id!=board[i][j]->team_id) {
                   distance= pow(row-i,2)+pow(col-j,2);
                     
                     if(distance <min_dist)
@@ -40,12 +41,11 @@ using namespace std;
         // loc is the locatcion of closer player to this player
         if(board[loc.first][loc.second]!=nullptr)
         {
-            board[loc.first][loc.second]->health-=HIT_DAMAGE;
+            board[loc.first][loc.second]->health-=10;
             if(board[loc.first][loc.second]->health<=0)
              {  
                 delete board[loc.first][loc.second];
                 board[loc.first][loc.second]=nullptr;
-
                 return 1;
              }
                 
@@ -62,7 +62,7 @@ using namespace std;
 
     void FootSoldier::return_to_max_health()
     {
-        this->health=MAX_HEALTH;
+        this->health=100;
     }
     
 

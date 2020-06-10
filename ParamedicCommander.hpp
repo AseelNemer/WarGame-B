@@ -1,18 +1,17 @@
-#pragma once
-#include <vector>
-#include "Paramedic.hpp"
+#ifndef UNTITLED_PARAMEDICCOMMANDER_PP
+#define UNTITLED_PARAMEDICCOMMANDER_PP
 #include "Soldier.hpp"
+#include "Paramedic.hpp"
 
 
-#define MAX_HEALTH 200
+//#define MAX_HEALTH 200
 
 //namespace WarGame{
     class ParamedicCommander : public Soldier{
-        protected:
-        int team_id;
+       
 
         public:
-        ParamedicCommander(int id): Soldier(MAX_HEALTH,0,id)  {}
+        ParamedicCommander(int id): Soldier(200,0,id)  {}
 
          ~ParamedicCommander()
         {
@@ -25,5 +24,5 @@
         void return_to_max_health()override;
 
     };
-
+#endif
 //} 

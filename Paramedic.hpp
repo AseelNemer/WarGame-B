@@ -1,14 +1,12 @@
-#pragma once
-#include <string>
-#include <stdexcept>
+#ifndef UNTITLED_PARAMEDIC_HPP
+#define UNTITLED_PARAMEDIC_HPP
 #include "Soldier.hpp"
 
-#define MAX_HEALTH 100
+
 
 //namespace WarGame{
     class Paramedic : public Soldier{
-        protected:
-        int team_id;
+        
         
 
         public:
@@ -23,5 +21,5 @@
         int get_id()override;
         void return_to_max_health()override;
     };
-
+#endif
 //} // namespace WarGame

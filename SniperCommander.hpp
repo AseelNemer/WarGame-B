@@ -1,20 +1,17 @@
-#pragma once
-#include <string>
-#include <vector>
-#include <stdexcept>
+#ifndef UNTITLED_SNIPERCOMMANDER_HPP
+#define UNTITLED_SNIPERCOMMANDER_HPP
 #include "Sniper.hpp"
 #include "Soldier.hpp"
 
-#define MAX_HEALTH 120
-#define HIT_DAMAGE 100
+//#define MAX_HEALTH 120
+//#define HIT_DAMAGE 100
 
 //namespace WarGame{
     class SniperCommander : public Soldier{
-        protected: 
-        int team_id;
+        
 
         public:
-        SniperCommander(int id): Soldier(MAX_HEALTH,HIT_DAMAGE,id){}
+        SniperCommander(int id): Soldier(120,100,id){}
 
          ~SniperCommander()
         {
@@ -26,5 +23,5 @@
         void return_to_max_health() override;
 
     };
-
+#endif
 //} 

@@ -1,17 +1,17 @@
-#pragma once
-#include <vector>
+#ifndef UNTITLED_FOOTSOLDIER_HPP
+#define UNTITLED_FOOTSOLDIER_HPP
 #include "Soldier.hpp"
 
-#define MAX_HEALTH 100
-#define HIT_DAMAGE 10
+
+//#define MAX_HEALTH 100
+//#define HIT_DAMAGE 10
 
 //namespace WarGame{
     class FootSoldier : public Soldier{
-        private:
-        int team_id;
+       
         public:
 
-        FootSoldier(int id): Soldier(MAX_HEALTH,HIT_DAMAGE,id){}
+        FootSoldier(int id): Soldier(100,10,id){}
         
         ~FootSoldier()
         {
@@ -24,5 +24,5 @@
         void return_to_max_health() override;
         double dist(std::pair<int, int> from, std::pair<int, int> to);
     };
-
+#endif
 //}

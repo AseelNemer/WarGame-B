@@ -1,31 +1,23 @@
-#pragma once
-#include <string>
-#include <vector>
-#include <stdexcept>
+#ifndef UNTITLED_SNIPER_HPP
+#define UNTITLED_SNIPER_HPP
 #include "Soldier.hpp"
 
-#define MAX_HEALTH 100
-#define HIT_DAMAGE 50
 
-//namespace WarGame
-//{
-    class Sniper : public Soldier{
-        protected:
-        int team_id;
+//namespace WarGame {
 
-        public:
-        Sniper(int id) :Soldier(MAX_HEALTH,HIT_DAMAGE,id) {}
 
+
+    class Sniper : public Soldier {
+    public:
+
+        explicit Sniper(int teamid): Soldier(100, 50, teamid) {}
         ~Sniper()
         {
             delete this;
         }
 
-        
-        int activate(std::vector<std::vector<Soldier*>> &board, int row, int col) override;
-        int get_id()override;
-        void return_to_max_health()override;
-        
-    };
-
-//} 
+        int activate(std::vector<std::vector<Soldier*>> &board, int rows, int cols) override;
+        int get_id() override;
+        void return_to_max_health() override;
+    }; 
+    #endif
